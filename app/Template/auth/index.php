@@ -1,42 +1,50 @@
-<div class="form-login">
+<!--
+	Harpreet Singh | harpreet@ahyconsulting.com
+	Modifications :
+		Modification in the html markup for better UI and structure
+-->
 
-    <?= $this->hook->render('template:auth:login-form:before') ?>
+<section class="login-section">
+	<div class="form-login">
 
-    <?php if (isset($errors['login'])): ?>
-        <p class="alert alert-error"><?= $this->text->e($errors['login']) ?></p>
-    <?php endif ?>
+		<?= $this->hook->render('template:auth:login-form:before') ?>
 
-    <?php if (! HIDE_LOGIN_FORM): ?>
-    <form method="post" action="<?= $this->url->href('AuthController', 'check') ?>">
+		<?php if (isset($errors['login'])): ?>
+			<p class="alert alert-error"><?= $this->text->e($errors['login']) ?></p>
+		<?php endif ?>
 
-        <?= $this->form->csrf() ?>
+		<?php if (! HIDE_LOGIN_FORM): ?>
+		<form method="post" action="<?= $this->url->href('AuthController', 'check') ?>">
 
-        <?= $this->form->label(t('Username'), 'username') ?>
-        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?>
+			<?= $this->form->csrf() ?>
 
-        <?= $this->form->label(t('Password'), 'password') ?>
-        <?= $this->form->password('password', $values, $errors, array('required')) ?>
+			<?= $this->form->label(t('Username'), 'username') ?>
+			<?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?>
 
-        <?php if (isset($captcha) && $captcha): ?>
-            <?= $this->form->label(t('Enter the text below'), 'captcha') ?>
-            <img src="<?= $this->url->href('CaptchaController', 'image') ?>" alt="Captcha">
-            <?= $this->form->text('captcha', array(), $errors, array('required')) ?>
-        <?php endif ?>
+			<?= $this->form->label(t('Password'), 'password') ?>
+			<?= $this->form->password('password', $values, $errors, array('required')) ?>
 
-        <?php if (REMEMBER_ME_AUTH): ?>
-            <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br>
-        <?php endif ?>
+			<?php if (isset($captcha) && $captcha): ?>
+				<?= $this->form->label(t('Enter the text below'), 'captcha') ?>
+				<img src="<?= $this->url->href('CaptchaController', 'image') ?>" alt="Captcha">
+				<?= $this->form->text('captcha', array(), $errors, array('required')) ?>
+			<?php endif ?>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Sign in') ?></button>
-        </div>
-        <?php if ($this->app->config('password_reset') == 1): ?>
-            <div class="reset-password">
-                <?= $this->url->link(t('Forgot password?'), 'PasswordResetController', 'create') ?>
-            </div>
-        <?php endif ?>
-    </form>
-    <?php endif ?>
+			<?php if (REMEMBER_ME_AUTH): ?>
+				<?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br>
+			<?php endif ?>
 
-    <?= $this->hook->render('template:auth:login-form:after') ?>
-</div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-blue"><?= t('Sign in') ?></button>
+			</div>
+			<?php if ($this->app->config('password_reset') == 1): ?>
+				<div class="reset-password">
+					<?= $this->url->link(t('Forgot password?'), 'PasswordResetController', 'create') ?>
+				</div>
+			<?php endif ?>
+		</form>
+		<?php endif ?>
+
+		<?= $this->hook->render('template:auth:login-form:after') ?>
+	</div>
+</section>
